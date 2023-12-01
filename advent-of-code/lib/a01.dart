@@ -63,11 +63,11 @@ Future<List<String>> getNumbers2() async {
       for (int i in wordToNum.keys) {
         int c = 0;
         for (Match m in wordToNum[i]!.allMatches(line)) {
-          line = line.substring(0, m.start + c * numberStrings[i - 1].length) +
+          int insertIndex = m.start + c * (numberStrings[i - 1].length + 1);
+          line = line.substring(0, insertIndex) +
               numberStrings[i - 1] +
               i.toString() +
-              line.substring(
-                  m.start + c * numberStrings[i - 1].length, line.length);
+              line.substring(insertIndex);
           c++;
         }
       }
