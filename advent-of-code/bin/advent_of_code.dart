@@ -1,5 +1,6 @@
 import 'package:advent_of_code/advent_of_code.dart' as advent_of_code;
 
+const currentApp = 2;
 void main(List<String> arguments) {
-  advent_of_code.runApp(1);
+  advent_of_code.runApp(currentApp);
 }
