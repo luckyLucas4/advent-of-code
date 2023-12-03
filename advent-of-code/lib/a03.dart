@@ -14,11 +14,29 @@ class SymbolsAndWords {
 
 void run() async {
   var result = 0;
-  final file = File('res/input3test.txt');
+  final file = File('res/input3.txt');
   SymbolsAndWords r = await getData(file);
   List<Coord> symbolCoords = r.symbolCoords;
   Map<Coord, String> numStringCoords = r.wordCoords;
-  
+  for (var e in numStringCoords.entries) {
+    for (var coord in symbolCoords) {
+      if (isAdjecent(coord, e.key, e.value)) {
+        result += int.tryParse(e.value)!;
+        break;
+      }
+    }
+  }
+  print(result);
+}
+
+bool isAdjecent(Coord symbol, Coord wordStart, String word) {
+  if (symbol.y >= (wordStart.y - 1) && symbol.y <= (wordStart.y + 1)) {
+    if (symbol.x >= (wordStart.x - 1) &&
+        symbol.x <= (wordStart.x + word.length)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 Future<SymbolsAndWords> getData(File file) async {
